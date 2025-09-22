@@ -1,8 +1,12 @@
 import React from 'react'
 import { assets } from '../assets/assets'
 import { Link } from 'react-router-dom'
+import { useClerk, useUser, UserButton } from '@clerk/clerk-react'
 
 const Navbar = () => {
+  const { openSignIn } = useClerk();
+  const { isSignedIn, user } = useUser();
+
   return (
     <div className='flex justify-between items-center mx-4 py-3 lg:mx-44'>
       
@@ -16,11 +20,23 @@ const Navbar = () => {
         <span className="font-bold text-lg sm:text-xl">BGone</span>
       </Link>
 
-      {/* Button */}
-      <button className='bg-zinc-800 text-white flex items-center gap-4 px-4 py-2 sm:px-8 sm:py-3 text-sm rounded-full'>
-        Get Started 
-        <img className='w-3 sm:w-4' src={assets.arrow_icon} alt=""/>
-      </button>
+      {/* Right side */}
+      {isSignedIn ? (
+        <div className="flex items-center gap-3">
+          <UserButton afterSignOutUrl="/" />
+          <span className="hidden sm:block font-medium text-gray-700">
+            {user?.firstName || user?.username || "User"}
+          </span>
+        </div>
+      ) : (
+        <button
+          onClick={() => openSignIn({})}
+          className="bg-zinc-800 text-white flex items-center gap-4 px-4 py-2 sm:px-8 sm:py-3 text-sm rounded-full hover:bg-zinc-700 transition"
+        >
+          Get Started 
+          <img className="w-3 sm:w-4" src={assets.arrow_icon} alt=""/>
+        </button>
+      )}
     </div>
   )
 }
