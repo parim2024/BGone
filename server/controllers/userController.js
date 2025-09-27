@@ -1,4 +1,4 @@
-/*
+
 import { Webhook } from "svix";
 import userModel from "../models/userModel.js"; // adjust path
 
@@ -68,8 +68,8 @@ const clerkWebhooks = async (req, res) => {
 };
 
 export { clerkWebhooks };
-*/
 
+/*
 
 import { Webhook } from "svix";
 import userModel from "../models/userModel.js"; // adjust path
@@ -135,3 +135,4 @@ const clerkWebhooks = async (req, res) => {
 };
 
 export { clerkWebhooks };
+*/
